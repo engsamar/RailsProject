@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :group_members
-  devise_for :users
+  devise_for :users , :controllers => { registrations: 'registrations' }
   resources :friends
   resources :orderdetails
   resources :orders
