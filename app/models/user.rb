@@ -6,4 +6,6 @@ class User < ActiveRecord::Base
 
   	has_many :friend
 	has_many :friends, :through => :friend
+	
 end
+

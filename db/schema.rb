@@ -20,9 +20,6 @@ ActiveRecord::Schema.define(version: 20160519120310) do
     t.datetime "updated_at",           null: false
   end
 
-  add_index "friends", ["friend_id"], name: "friend_id", using: :btree
-  add_index "friends", ["user_id"], name: "user_id", using: :btree
-
   create_table "group_members", force: :cascade do |t|
     t.integer  "group_id",   limit: 4
     t.integer  "user_id",    limit: 4
@@ -86,8 +83,6 @@ ActiveRecord::Schema.define(version: 20160519120310) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "friends", "users", column: "friend_id", name: "friends_ibfk_2", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "friends", "users", name: "friends_ibfk_1", on_update: :cascade, on_delete: :cascade
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
   add_foreign_key "orderdetails", "orders"
