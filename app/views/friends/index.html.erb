@@ -1,8 +1,37 @@
 <p id="notice"><%= notice %></p>
+ <%= current_user.email %>
+<%= form_for User.new do |f| %>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%= form_tag("/users/search", method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+<!-- Multiple Hashes in Form Helper Calls -->
+<%= form_tag(users_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
+  <%= submit_tag "Search", :name => nil %>
+<% end %>
+
+###################
+<%= form_tag("/users/search", method: "get") do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
 
 <h1>Listing Friends</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>User</th>
