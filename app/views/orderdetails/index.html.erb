@@ -1,8 +1,15 @@
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <p id="notice"><%= notice %></p>
+<div style="float: right;">
+  <%= link_to 'Start new order', new_order_path,class:'btn btn-primary' %>
+</div>
+<h3>Listing Orderdetails</h3>
 
-<h1>Listing Orderdetails</h1>
-
-<table>
+<div class="table-responsive">
+<table class="table table-bordered table-hover ">
   <thead>
     <tr>
       <th>Item</th>
@@ -22,8 +29,8 @@
         <td><%= orderdetail.amount %></td>
         <td><%= orderdetail.price %></td>
         <td><%= orderdetail.comment %></td>
-        <td><%= orderdetail.user %></td>
-        <td><%= orderdetail.order %></td>
+        <td><%= orderdetail.user.name %></td>
+        <td><%= orderdetail.order.id %></td>
         <td><%= link_to 'Show', orderdetail %></td>
         <td><%= link_to 'Edit', edit_orderdetail_path(orderdetail) %></td>
         <td><%= link_to 'Destroy', orderdetail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -31,7 +38,12 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 <br>
 
-<%= link_to 'New Orderdetail', new_orderdetail_path %>
+
+</div>
+</div>
+</div>
+</div>

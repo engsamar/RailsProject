@@ -1,18 +1,36 @@
+<style>
+a{
+  margin-left: 10px;
+  font-weight:bold;
+  font-size:16px;
+  color:white;
+}
+  
+</style>
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <p id="notice"><%= notice %></p>
 
-<h2>Orders</h2>
 
-<table class="table ">
+<div style="float: right;">
+  <%= link_to 'Start new order', new_order_path,class:'btn btn-primary' %>
+</div>
+
+<h3 style="color: darkblue;" >Orders</h3>
+<div class="table-responsive">
+<table class="table table-bordered table-hover ">
   <thead>
-    <tr>
-      <th>Name</th>
+    <tr class="active">
+      <th>Order</th>
       <th>Restaurant</th>
       <th>Date</th>
       <th>User</th>   
 
       <th>Invited</th>
       <th>Joined</th>
-
+      <th>Status</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -22,18 +40,24 @@
       <tr>
         <td><%= order.name %></td>
         <td><%= order.restaurant %></td>
-        <td><%= order.date %></td>
-        <td><%= order.user %></td>
+        <td><%= order.date.strftime("%Y-%m-%d") %></td>
+        <td><%= order.user.name %></td>
+         <td><%= Invitation.where(:order_id=>order.id).count %></td>
+          <td><%= Invitation.where(:is_join=>1,:order_id=>order.id ).count %></td>
+          <td> <%= order.status %></td>
         <td> <%= link_to 'Show', order,class:"btn btn-primary" %> 
-        <%= link_to 'Edit', edit_order_path(order) ,class:"btn btn-success"%> 
-        <%= link_to 'Destroy', order,class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Finish', order,class:"btn btn-success", method: :finish, data: { confirm: 'Are you sure to finish the order ?' } %> 
+        <%= link_to 'Cancel', order,class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure to cancel the order?' } %>
 
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
+  </div>
+</div>
+</div>
+</div>
+</div>
 
-<br>
 
-<%= link_to 'New Order', new_order_path %>

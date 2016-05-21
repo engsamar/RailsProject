@@ -1,3 +1,7 @@
+<div id="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -17,13 +21,68 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @order.date %>
+  <%= @order.date.strftime("%Y-%m-%d") %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @order.user %>
+  <strong>By:</strong>
+  <%= @order.user.name %>
 </p>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
+
+
+<div class="table-responsive">
+<table class="table table-bordered table-hover ">
+  <thead>
+    <tr>
+      <th>Person</th>
+      <th>Item</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Comment</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Orderdetail.where( :order_id=> @order.id ).each do |orderdetail| %>
+      <tr>
+      <td><%= orderdetail.user.name %></td>
+        <td><%= orderdetail.item %></td>
+        <td><%= orderdetail.amount %></td>
+        <td><%= orderdetail.price %></td>
+        <td><%= orderdetail.comment %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+
+<%= form_for([@order ,@order.orderdetails.build ]) do |f| %>
+<table class="table">
+  <tr>
+  <th>Item</th>
+  <th>Amount</th>
+  <th>Price</th>
+  <th>Comments</th>
+  <th>Add</th>
+  </tr>
+
+<tr>
+    <td><%= f.text_field :item %></td>
+    <td><%= f.number_field :amount %></td>
+    <td><%= f.text_field :price %></td>
+    <td><%= f.text_area :comment %></td>
+    <!--<td><%= f.text_field :user_id %></td>
+    <td><%= f.text_field :order_id %></td>-->
+    <td><%= submit_tag("Submit") %></td>
+</tr>
+</table>
+<% end %>
+
+</div>
+</div>
+</div>
+</div>

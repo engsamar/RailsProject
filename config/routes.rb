@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :invitations
   resources :group_members
   devise_for :users
   resources :friends
@@ -6,6 +7,13 @@ Rails.application.routes.draw do
   resources :orders
   resources :groups
   resources :users
+
+  resources :orders do 
+    resources :orderdetails
+  end
+
+  post 'orders/:id' => 'orders#finish'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

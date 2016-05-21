@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Is join:</strong>
+  <%= @invitation.is_join %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @invitation.user %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @invitation.order %>
+</p>
+
+<%= link_to 'Edit', edit_invitation_path(@invitation) %> |
+<%= link_to 'Back', invitations_path %>
