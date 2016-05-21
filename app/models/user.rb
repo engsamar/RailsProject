@@ -4,6 +4,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  	has_many :friend
+  has_many :friend
 	has_many :friends, :through => :friend
+	def self.search(search)
+  # Title is for the above case, the OP incorrectly had 'name'
+  where("email LIKE ?", "%#{search}%")
 end
+	
+end
+

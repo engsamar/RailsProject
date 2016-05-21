@@ -1,0 +1,38 @@
+<h1>Welcome#index</h1>
+<% if user_signed_in? %>
+<div class="well">
+<table class="table" >
+  <thead>
+    <tr>
+      <th>Last Orders</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @orders.each do |order| %>
+      <tr>
+        <td><a href="/orders/<%=order.id%>"><%= order.name %> on <%= order.date %></a></td>      
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<div class="well">
+<table  class="table">
+  <thead>
+    <tr>
+      <th>Last activites</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @activity.each do |act| %>
+      <tr>      
+        <td>username has created <a href="/orders/<%=act.id%>">an order</a> for <a href="/orders/<%=act.id%>"><%= act.name %></a> from <a href="/orders/<%=act.id%>"><%=act.restaurant %></a></td>      
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520204050) do
+ActiveRecord::Schema.define(version: 20160521140750) do
 
   create_table "friends", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20160520204050) do
 
   add_index "invitations", ["order_id"], name: "index_invitations_on_order_id", using: :btree
   add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "orderdetails", force: :cascade do |t|
     t.string   "item",       limit: 255

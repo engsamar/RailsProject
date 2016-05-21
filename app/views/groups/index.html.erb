@@ -1,22 +1,33 @@
 <p id="notice"><%= notice %></p>
+ <%= form_for Group.new do |f| %>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <h1>Listing Groups</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @groups.each do |group| %>
       <tr>
         <td><%= group.name %></td>
-        <td><%= link_to 'Show', group %></td>
+         <td><%= group.id %></td>
+        <td><%= link_to 'Show', group,class: 'btn btn-primary btn-xs' %></td>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>        
+        <td><a   href="/group_members/new/"><span class="fa fa-user-plus"> </span></a></td>
+        <td><a  data-method="delete" href="/groups/<%= group.id %>"><span class="glyphicon glyphicon-remove-sign"> </span></a></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New Group', new_group_path %>
+ <%= link_to 'New Group', new_group_path %>
