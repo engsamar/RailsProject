@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :orders
   resources :groups
   resources :users
+  get '/check', to: 'home#check'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
