@@ -60,7 +60,13 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def search
+    @user=User.find_by_email(params[:email])
+     #redirect_to :action => 'index' to redirect same page
+     format.html { edirect_to :action => 'friends/index', notice: 'User was successfully updated.' }
+        format.json { render :show, status: :ok, location: @user }
 
+  end 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -71,4 +77,5 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :password, :email, :image)
     end
+
 end
