@@ -11,7 +11,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">      
       <% if user_signed_in? %>
-      <li><a href="/"><%= current_user.email %></a></li>
+      <li><a href="/">Hello:<%= current_user.name%></a></li>
       <li><a  data-method="delete" href="/users/sign_out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       <% else %>
       <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
