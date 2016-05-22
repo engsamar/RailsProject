@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable ,:omniauthable
 
-  has_many :friend
+  has_many :friends
+  has_many :orders
 	has_many :friends, :through => :friend
   has_many :invitations
 	def self.search(search)
