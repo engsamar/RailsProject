@@ -23,10 +23,10 @@ class WelcomeController < ApplicationController
     begin
       20.times do
        # messages = Message.where("created_at > ?", 3.seconds.ago)
-        invits = Invitation.where("user_id = ?",current_user.id)
+       invits = Invitation.where("user_id = ?",current_user.id)
         unless invits.empty?
           # make your action here for notification
-           sse.write({invits: invits.as_json}, {event: 'refresh'})
+          sse.write({invits: invits.as_json}, {event: 'refresh'})
         end
         sleep 3
       end

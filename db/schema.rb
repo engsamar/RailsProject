@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 20160522092544) do
   add_foreign_key "group_members", "users"
   add_foreign_key "invitations", "orders"
   add_foreign_key "invitations", "users"
-  add_foreign_key "orderdetails", "orders", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "orderdetails", "users", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "orders", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "orderdetails", "orders"
+  add_foreign_key "orderdetails", "users"
+  add_foreign_key "orders", "users"
 end
