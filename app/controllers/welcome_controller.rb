@@ -1,8 +1,8 @@
 require 'simple_app/sse.rb' 
 class WelcomeController < ApplicationController
-  #include ActionController::Live
+  include ActionController::Live
   before_filter :authenticate_user!
-
+  # session[:n]=1
   def index
   	 @orders = Order.where(:user_id => current_user.id).limit(3).order("id desc")
   	 #select current user friends 
@@ -35,6 +35,11 @@ class WelcomeController < ApplicationController
     ensure
       sse.close
     end
+  end
+
+
+  def notify
+
   end
 
 end

@@ -44,6 +44,7 @@ resources :orders do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   get '/check', to: 'home#check'
+  get 'welcome/notify', to: 'welcome#notify'
   get 'welcome/check', to: 'welcome#check'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
