@@ -1,6 +1,6 @@
 require 'simple_app/sse.rb' 
 class WelcomeController < ApplicationController
-  include ActionController::Live
+  #include ActionController::Live
   before_filter :authenticate_user!
 
   def index
@@ -22,10 +22,11 @@ class WelcomeController < ApplicationController
     sse = SimpleApp::SSE.new(response.stream)
     begin
       20.times do
-        messages = Message.where("created_at > ?", 3.seconds.ago)
-        unless messages.empty?
+       # messages = Message.where("created_at > ?", 3.seconds.ago)
+        invits = Invitation.where("user_id = ?",current_user.id)
+        unless invits.empty?
           # make your action here for notification
-          # sse.write({messages: messages.as_json}, {event: 'refresh'})
+           sse.write({invits: invits.as_json}, {event: 'refresh'})
         end
         sleep 3
       end

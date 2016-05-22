@@ -120,15 +120,8 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
-<<<<<<< HEAD
     pg (0.18.4)
-=======
-
-    pg (0.18.4)
-
->>>>>>> 9b090f06f68fc434fdfbc810f919ae7dded2b676
     puma (3.4.0)
-
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -218,7 +211,8 @@ DEPENDENCIES
   jquery-rails
   less-rails
   mysql2 (>= 0.3.13, < 0.5)
-<<<<<<< HEAD
+  omniauth
+  omniauth-facebook
   pg
   puma
   rails (= 4.2.6)
@@ -233,5 +227,3 @@ DEPENDENCIES
 
 BUNDLED WITH
    1.12.3
-=======
->>>>>>> 9b090f06f68fc434fdfbc810f919ae7dded2b676

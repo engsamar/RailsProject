@@ -32,13 +32,8 @@ class OrdersController < ApplicationController
     @order.status="Waiting";
     respond_to do |format|
       if @order.save
-        #format.html { redirect_to :controller => 'invitations' , :action => 'new' }
-        format.html { redirect_to edit_order_path(@order) }
-
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to invitations_url, notice: 'Order was successfully created.' }
-        format.json { render :show, status: :created, location: @order }
+        format.html { redirect_to :controller => 'invitations' , :action => 'new' }
+        #format.html { redirect_to edit_order_path(@order) }
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
