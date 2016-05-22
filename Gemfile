@@ -28,10 +28,13 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
 #font awesome icons
 gem 'font-awesome-sass'
-
+# gem 'font-awesome-sass', '~> 4.4'
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
+# facebook api
+gem 'omniauth' 
+gem 'omniauth-facebook'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

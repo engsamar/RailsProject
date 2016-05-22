@@ -28,10 +28,7 @@
   <strong>By:</strong>
   <%= @order.user.name %>
 </p>
-
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
-
+<%= link_to 'Invite Friend', edit_order_path(@order), class:"btn btn-success" %>
 
 <div class="table-responsive">
 <table class="table table-bordered table-hover ">
@@ -59,7 +56,7 @@
 </table>
 </div>
 
-
+<% if @order.status !="finished" %>
 <%= form_for([@order ,@order.orderdetails.build ]) do |f| %>
 <table class="table">
   <tr>
@@ -75,13 +72,15 @@
     <td><%= f.number_field :amount %></td>
     <td><%= f.text_field :price %></td>
     <td><%= f.text_area :comment %></td>
-    <!--<td><%= f.text_field :user_id %></td>
-    <td><%= f.text_field :order_id %></td>-->
     <td><%= submit_tag("Submit") %></td>
 </tr>
 </table>
 <% end %>
 
+
+<% end %>
+
+<%= link_to 'Back', orders_path , class: "btn btn-info" %>
 </div>
 </div>
 </div>
