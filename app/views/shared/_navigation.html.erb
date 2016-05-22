@@ -12,10 +12,11 @@
     <ul class="nav navbar-nav navbar-right">      
       <% if user_signed_in? %>
       <li><a href="/">Hello:<%= current_user.name%></a></li>
+       <li class="round-image-100"><%= link_to image_tag(current_user.image.url(:small)), current_user.image.url %></li>
       <li><a  data-method="delete" href="/users/sign_out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       <% else %>
       <li><a href="/users/sign_up"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="/users/sign_in"><span class="glyphicon glyphicon-log-in"></span> Login</a><%= session[:notification]%></li>
       <% end %>
     </ul>
   </div>
