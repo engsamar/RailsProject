@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :friend
 	has_many :friends, :through => :friend
+  has_many :invitations
 	def self.search(search)
   # Title is for the above case, the OP incorrectly had 'name'
   where("email LIKE ?", "%#{search}%")

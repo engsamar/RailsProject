@@ -1,6 +1,17 @@
 <h1>Editing Order</h1>
+<% Invitation.where(:order_id => @order.id).each do |invits| %>
+<%= invits.user_id %>
+<% end %>
+<%= form_for([@order,@order.invitations.build]) do |f| %>
 
-<%= render 'form' %>
-
-<%= link_to 'Show', @order %> |
-<%= link_to 'Back', orders_path %>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :order_id  %>
+  </div>
+  <div class="actions">
+    <%= f.submit :ADD %>
+  </div>
+<% end %>

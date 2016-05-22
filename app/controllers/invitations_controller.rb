@@ -25,10 +25,11 @@ class InvitationsController < ApplicationController
   # POST /invitations.json
   def create
     @invitation = Invitation.new(invitation_params)
-
+    #@invitation.order_id=params[:order_id]
+    @invitation.is_join=false
     respond_to do |format|
       if @invitation.save
-        format.html { redirect_to @invitation, notice: 'Invitation was successfully created.' }
+        format.html { redirect_to @invitation }
         format.json { render :show, status: :created, location: @invitation }
       else
         format.html { render :new }

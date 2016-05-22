@@ -29,9 +29,11 @@ class OrdersController < ApplicationController
 
     @order = Order.new(order_params)
     @order.user_id = current_user.id
+    @order.status="Waiting";
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        #format.html { redirect_to :controller => 'invitations' , :action => 'new' }
+        format.html { redirect_to edit_order_path(@order) }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -65,7 +67,7 @@ class OrdersController < ApplicationController
   end
 
   def finish
-    Order.where( id: params[:id] ).update_all( status: 'finish' )
+    Order.where( id: params[:id] ).update_all( status: 'finished' )
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully finished.' }
       format.json { head :no_content }

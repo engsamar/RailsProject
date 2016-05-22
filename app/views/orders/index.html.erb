@@ -7,10 +7,7 @@ a{
 }
   
 </style>
-<div id="page-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
 <p id="notice"><%= notice %></p>
 
 
@@ -46,7 +43,9 @@ a{
           <td><%= Invitation.where(:is_join=>1,:order_id=>order.id ).count %></td>
           <td> <%= order.status %></td>
         <td> <%= link_to 'Show', order,class:"btn btn-primary" %> 
+        <% if order.status != "finished" %>
         <%= link_to 'Finish', order,class:"btn btn-success", method: :finish, data: { confirm: 'Are you sure to finish the order ?' } %> 
+         <% end %>
         <%= link_to 'Cancel', order,class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure to cancel the order?' } %>
 
         </td>
@@ -56,8 +55,6 @@ a{
 </table>
   </div>
 </div>
-</div>
-</div>
-</div>
+
 
 

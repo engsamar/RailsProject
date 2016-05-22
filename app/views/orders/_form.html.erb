@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.select :name,"<option value='Breakfast'>Breakfast</option><option value='Dinner'>Dinner</option><option value='Lunch'>Lunch</option>".html_safe , class: "form-control"%>
+
   </div>
   <div class="field">
-    <%= f.label :restaurant %><br>
+    <%= f.label :"Restaurant Name" %><br>
     <%= f.text_field :restaurant %>
   </div>
   <div class="field">
@@ -26,10 +26,6 @@
   <div class="field">
     <%= f.label :date %><br>
     <%= f.datetime_select :date %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     resources :orderdetails
   end
 
+    resources :orders do 
+    resources :invitations
+  end
+
   post 'orders/:id' => 'orders#finish'
 
   # resources :users

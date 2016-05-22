@@ -48,7 +48,7 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
+  adapter: postgresql
   database: RailsProject_production
   username: RailsProject
   password: <%= ENV['RAILSPROJECT_DATABASE_PASSWORD'] %>

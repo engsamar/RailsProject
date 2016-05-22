@@ -27,11 +27,12 @@ class OrderdetailsController < ApplicationController
     @orderdetail = Orderdetail.new(orderdetail_params)
     @orderdetail.user_id = current_user.id
     @orderdetail.order_id=params[:order_id]
+    @orderdetail.price=@orderdetail.price * @orderdetail.amount
     respond_to do |format|
       if @orderdetail.save
-        format.html { redirect_to order_url, notice: 'Order was successfully finished.' }
-        format.json { head :no_content }
-       # format.html { redirect_to @orderdetail, notice: 'Orderdetail was successfully created.' }
+        format.html { redirect_to :controller => 'welcome',:action => 'index', :order_id => @orderdetail.id}
+        format.json { render :show, status: :created, location: @orderdetail }
+       # format.html { redirect_to @orderdetail, notice: 'Orde45rdetail was successfully created.' }
        # format.json { render :show, status: :created, location: @orderdetail }
       else
         format.html { render :new }
