@@ -26,10 +26,13 @@
   </thead>
 
   <tbody>
-    <% @activity.each do |act| %>
+    <% @user_friend.each do |friend| %>
+      <% friend.orders.each do |order| %>
       <tr>      
-        <td>username has created <a href="/orders/<%=act.id%>">an order</a> for <a href="/orders/<%=act.id%>"><%= act.name %></a> from <a href="/orders/<%=act.id%>"><%=act.restaurant %></a></td>      
+        <td><%=friend.name%> has created <a href="/orders/<%=order.id%>">an order</a> for <a href="/orders/<%=order.id%>"><%= order.name %></a> from <a href="/orders/<%=order.id%>"><%=order.restaurant %></a>
+        </td>      
       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

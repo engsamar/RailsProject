@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
   resources :group_members
   devise_for :users , :controllers => { registrations: 'registrations' }
-  resources :friends
+  # resources :friends
   resources :orderdetails
   resources :orders
   resources :groups
   # resources :users
   resource :users do
     get "search"
+    end
+  resources :friends do 
+      get "unfriend"
     end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
