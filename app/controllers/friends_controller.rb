@@ -67,7 +67,7 @@ class FriendsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  #/friend_id /unfriend 
   def unfriend     
    @friend=Friend.where(:user_id => current_user.id , :friend_id => params[:friend_id]).destroy
    format.html { redirect_to friends_url, notice: 'Friend was successfully destroyed.' }

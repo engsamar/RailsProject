@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
+  resources :invitations
   resources :group_members
   devise_for :users , :controllers => { registrations: 'registrations' }
   # resources :friends
   resources :orderdetails
   resources :orders
   resources :groups
+
+  resources :orders do 
+    resources :orderdetails
+  end
+
+  post 'orders/:id' => 'orders#finish'
+
   # resources :users
   resource :users do
     get "search"
@@ -17,7 +25,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
-
+  get '/check', to: 'home#check'
+  get 'welcome/check', to: 'welcome#check'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

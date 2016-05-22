@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160519120310) do
+ActiveRecord::Schema.define(version: 20160521140750) do
 
   create_table "friends", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -19,6 +19,9 @@ ActiveRecord::Schema.define(version: 20160519120310) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
   end
+
+  add_index "friends", ["friend_id"], name: "friend_id", using: :btree
+  add_index "friends", ["user_id"], name: "user_id", using: :btree
 
   create_table "group_members", force: :cascade do |t|
     t.integer  "group_id",   limit: 4
@@ -34,6 +37,23 @@ ActiveRecord::Schema.define(version: 20160519120310) do
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "invitations", force: :cascade do |t|
+    t.boolean  "is_join"
+    t.integer  "user_id",    limit: 4
+    t.integer  "order_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "invitations", ["order_id"], name: "index_invitations_on_order_id", using: :btree
+  add_index "invitations", ["user_id"], name: "index_invitations_on_user_id", using: :btree
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "orderdetails", force: :cascade do |t|
@@ -58,6 +78,7 @@ ActiveRecord::Schema.define(version: 20160519120310) do
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "status",     limit: 255
   end
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
@@ -83,8 +104,12 @@ ActiveRecord::Schema.define(version: 20160519120310) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "friends", "users", column: "friend_id", name: "friends_ibfk_2", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "friends", "users", name: "friends_ibfk_1", on_update: :cascade, on_delete: :cascade
   add_foreign_key "group_members", "groups"
   add_foreign_key "group_members", "users"
+  add_foreign_key "invitations", "orders"
+  add_foreign_key "invitations", "users"
   add_foreign_key "orderdetails", "orders"
   add_foreign_key "orderdetails", "users"
   add_foreign_key "orders", "users"

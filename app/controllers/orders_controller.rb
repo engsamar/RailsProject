@@ -5,11 +5,13 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @orders = Order.all
+    @invits = Invitation.all
   end
 
   # GET /orders/1
   # GET /orders/1.json
   def show
+
   end
 
   # GET /orders/new
@@ -24,8 +26,9 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
 
+    @order = Order.new(order_params)
+    @order.user_id = current_user.id
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -57,6 +60,14 @@ class OrdersController < ApplicationController
     @order.destroy
     respond_to do |format|
       format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  def finish
+    Order.where( id: params[:id] ).update_all( status: 'finish' )
+    respond_to do |format|
+      format.html { redirect_to orders_url, notice: 'Order was successfully finished.' }
       format.json { head :no_content }
     end
   end
