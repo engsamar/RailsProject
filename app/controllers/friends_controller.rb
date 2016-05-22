@@ -4,7 +4,9 @@ class FriendsController < ApplicationController
   # GET /friends
   # GET /friends.json
   def index
-    @friends = Friend.all
+     @friends = Friend.where(:user_id => current_user.id)
+     @fr=User.where(id: Friend.select("friend_id").where(:user_id => current_user.id))
+
     if params[:search]
       @users = User.search(params[:search]).order("created_at DESC")
     else
@@ -65,6 +67,13 @@ class FriendsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #/friend_id /unfriend 
+  def unfriend     
+   @friend=Friend.where(:user_id => current_user.id , :friend_id => params[:friend_id]).destroy
+   format.html { redirect_to friends_url, notice: 'Friend was successfully destroyed.' }
+      format.json { head :no_content }
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

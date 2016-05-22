@@ -34,6 +34,10 @@ class OrdersController < ApplicationController
       if @order.save
         #format.html { redirect_to :controller => 'invitations' , :action => 'new' }
         format.html { redirect_to edit_order_path(@order) }
+
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to invitations_url, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }

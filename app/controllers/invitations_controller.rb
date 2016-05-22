@@ -25,6 +25,7 @@ class InvitationsController < ApplicationController
   # POST /invitations.json
   def create
     @invitation = Invitation.new(invitation_params)
+
     #@invitation.order_id=params[:order_id]
     @invitation.is_join=false
     respond_to do |format|

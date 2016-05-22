@@ -1,3 +1,4 @@
+
 <h1>Editing Order</h1>
 <% Invitation.where(:order_id => @order.id).each do |invits| %>
 <%= invits.user_id %>
@@ -15,3 +16,11 @@
     <%= f.submit :ADD %>
   </div>
 <% end %>
+
+
+<h1>Editing invitation</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @order %> |
+<%= link_to 'Back', orders_path %>

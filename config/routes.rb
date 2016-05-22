@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
   resources :invitations
   resources :group_members
-  devise_for :users , :controllers => { registrations: 'registrations' }
+
+  # devise_for :users , :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , registrations: 'registrations'}
+
   resources :friends
+
+  devise_for :users , :controllers => { registrations: 'registrations' }
+  # resources :friends
   resources :orderdetails
   resources :orders
   resources :groups
 
   resources :orders do 
     resources :orderdetails
+  end
+resources :orders do 
+    resources :invitations
   end
 
     resources :orders do 
@@ -18,9 +27,17 @@ Rails.application.routes.draw do
   post 'orders/:id' => 'orders#finish'
 
   # resources :users
+
+  # resource :users do
+  #   get "search"
+  # end
+
   resource :users do
     get "search"
-  end
+    end
+  resources :friends do 
+      get "unfriend"
+    end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
