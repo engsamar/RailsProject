@@ -22,14 +22,11 @@ class WelcomeController < ApplicationController
     sse = SimpleApp::SSE.new(response.stream)
     begin
       20.times do
-       messages = Message.where("created_at > ?", 3.seconds.ago)
-        # invits = Invitation.where("user_id = ?",current_user.id)
-        unless messages.empty?
-          # make your action here for notification
+       # messages = Message.where("created_at > ?", 3.seconds.ago)
+        invits = Invitation.where("user_id = ?",current_user.id)
+        unless invits.empty?
            # sse.write({messages: messages.as_json}, {event: 'refresh'})
-           # session[:notification] = "ssss"
-           # session[:n] += 1
-           # redirect_to '/welcome/index'
+           sse.write({invits: invits.as_json}, {event: 'refresh'})
         end
         sleep 3
       end
