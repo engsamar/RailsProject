@@ -21,9 +21,12 @@ class WelcomeController < ApplicationController
 
     sse = SimpleApp::SSE.new(response.stream)
     begin
-      20.times do
+      10000.times do
        # messages = Message.where("created_at > ?", 3.seconds.ago)
-        invits = Invitation.where("user_id = ?",current_user.id)
+       t = Time.now
+       t4 = t + 2*60*60
+       t4 = t4 - 3 
+        invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t4)
         unless invits.empty?
            # sse.write({messages: messages.as_json}, {event: 'refresh'})
            sse.write({invits: invits.as_json}, {event: 'refresh'})
