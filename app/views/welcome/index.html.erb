@@ -11,7 +11,7 @@
   <tbody>
     <% @orders.each do |order| %>
       <tr>
-        <td><a href="/orders/<%=order.id%>"><%= order.name %> on <%= order.date %></a></td>      
+        <td><a href="/orders/<%=order.id%>" style="color:blue;"><%= order.name %> on <%= order.date %></a></td>      
       </tr>
     <% end %>
   </tbody>
@@ -29,7 +29,7 @@
     <% @user_friend.each do |friend| %>
       <% friend.orders.each do |order| %>
       <tr>      
-        <td><%=friend.name%> has created <a href="/orders/<%=order.id%>">an order</a> for <a href="/orders/<%=order.id%>"><%= order.name %></a> from <a href="/orders/<%=order.id%>"><%=order.restaurant %></a>
+        <td><%=friend.name%> has created <a href="/orders/<%=order.id%>" style="color:blue;">an order</a> for <a href="/orders/<%=order.id%>" style="color:black;"><%= order.name %></a> from <a href="/orders/<%=order.id%>" style="color:red;"><%=order.restaurant %></a>
         </td>      
       </tr>
     <% end %>

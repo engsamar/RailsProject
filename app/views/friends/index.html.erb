@@ -7,7 +7,9 @@
   </p>
 <% end %>
 
-<table class="table col-md-8">
+<div class="col-md-6 col-md-offset-1">
+  
+<table class="table">
 <thead>
     <tr>
       <th><i>friend</i></th> 
@@ -18,13 +20,13 @@
       <tr>
       <% unfriend = User.where('id ='+friend.friend_id.to_s)%>
       <% unfriend.each do |f| %>
-        <td><b><%=f.name %></b></td>       
+        <td><span class="round-image-100"><%= link_to image_tag(f.image.url(:small)), f.image.url %></span><b><%=f.name %></b></td>       
         <td><b><%= link_to 'unfriend', friend, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></b></td>
         <% end %>
       </tr>
     <% end %>
 </table>
-
+</div>
 <br/>
 
 
