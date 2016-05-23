@@ -18,7 +18,7 @@
         <td><%= order['name'] %></td>
         <td><%= order['restaurant'] %></td>
         <td>
-        <% if order["joined"] == true %>
+        <% if order["joined"] == false %>
         <a href="/invitations/join/<%= order['invite_id'] %>">
         <span class="glyphicon glyphicon-ok" style="color:blue;"></span></a>
         <% end %>

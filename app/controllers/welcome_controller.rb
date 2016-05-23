@@ -23,7 +23,7 @@ class WelcomeController < ApplicationController
     response.headers['Content-Type'] = 'text/event-stream'
     sse = SimpleApp::SSE.new(response.stream)
     begin
-      10000.times do
+      10.times do
        t = Time.now
         t = t - 3
         invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t)
