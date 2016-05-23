@@ -71,7 +71,7 @@ class InvitationsController < ApplicationController
     invite =   Invitation.find_by("id = ?",@id)
     invite.is_join = true
     invite.save
-    redirect_to :controller => 'invitations' , :action => 'index'
+    redirect_to :controller => 'orders' ,:action => 'show' , :id => invite.order_id
     # respond_to do |format|
     #   if @invitation.update(invitation_params)
     #     format.html { redirect_to :controller => 'invitations' , :action => 'index'}

@@ -70,16 +70,23 @@ end
     @friend = Friend.new()    
     @friend.user_id = current_user.id
     # condition to prevent current user to add himself and check if friend is added before
-    if @user.id !=  current_user.id && !Friend.exists?(:user_id=>current_user.id ,:friend_id =>@user.id ) 
-      @friend.friend_id=@user.id
-      respond_to do |format|
-        if @friend.save
-          format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
+    if User.exists?(:email=>params[:search])
+
+      if @user.id !=  current_user.id && !Friend.exists?(:user_id=>current_user.id ,:friend_id =>@user.id ) 
+        @friend.friend_id=@user.id
+        respond_to do |format|
+          if @friend.save
+            format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
+          end
+      end
+      else
+        respond_to do |format|
+        format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
         end
-    end
+      end
     else
       respond_to do |format|
-      format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
+        format.html { redirect_to :controller => 'friends' , :action => 'index'}
       end
     end
   end 
