@@ -27,7 +27,7 @@ class WelcomeController < ApplicationController
        # messages = Message.where("created_at > ?", 3.seconds.ago)
        t = Time.now
        # t4 = t + 2*60*60
-        t = t - 3 
+        t = t - 3
         invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t)
         unless invits.empty?
           # make your action here for notification
@@ -44,7 +44,29 @@ class WelcomeController < ApplicationController
 
 
   def notify
-
+     @invits = Invitation.where("user_id = ?",current_user.id)
+     # puts @invits
+     # puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+     @user_invits=[]
+     @invits.each do |invit|
+     # puts "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+       puts invit.id
+       @id=invit.order_id
+       # puts "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+       puts @id
+       @record = Order.find_by("id = ?",@id)
+        # puts "777777777777777777777777777777777777777777777777777777777777777777777"
+       puts @record.name
+       @user_invits << {"name" => @record.name , "restaurant" => @record.restaurant , "invite_id"=> invit.id , "joined" => invit.is_join} 
+        # @orders=Order.where(id:Invitation.where(:user_id => current_user.id))
+      # @orders=Order.where(id: Invitation.select("order_id").where(:user_id => current_user.id))
+     end
+     # @orders = []
+     # @user_invits.each do |f|
+     #    # abort("sss")
+        
+     #   @orders << @ord.name 
+     # end
   end
 
 end

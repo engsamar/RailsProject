@@ -1,7 +1,7 @@
 
 <h1>Invite Friends</h1>
 <% Invitation.where(:order_id => @order.id).each do |invits| %>
-<%= invits.user_id.name %>
+<%= invits.user_id %>
 <% end %>
 <%= form_tag("/users/invite", method: "get") do %>
   <p>

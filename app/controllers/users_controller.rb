@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     if user_signed_in?
      @users = User.all
    else
-      redirect_to new_user_session_url
-   end
+    redirect_to new_user_session_url
   end
+end
 
   # GET /users/1
   # GET /users/1.json
@@ -64,19 +64,26 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-   def search
+#added friend by Email
+  def search
     @user=User.find_by_email(params[:search])
     @friend = Friend.new()    
     @friend.user_id = current_user.id
-    @friend.friend_id=@user.id
-    respond_to do |format|
-      if @friend.save
-     #redirect_to :action => 'index' to redirect same page
-     format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
-      # format.json { render :show, status: :ok, location: @user }
+    # condition to prevent current user to add himself and check if friend is added before
+    if @user.id !=  current_user.id && !Friend.exists?(:user_id=>current_user.id ,:friend_id =>@user.id ) 
+      @friend.friend_id=@user.id
+      respond_to do |format|
+        if @friend.save
+          format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
+        end
+    end
+    else
+      respond_to do |format|
+      format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
       end
     end
   end 
+
 
 def invite
     @user=User.find_by_name(params[:search])
@@ -95,6 +102,7 @@ def invite
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
@@ -107,4 +115,4 @@ def invite
       accessible << [ :password, :password_confirmation ] unless params[:user][:password].blank?
       params.require(:user).permit(accessible)
     end
-end
+  end

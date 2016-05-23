@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p>
  <%= form_for Group.new do |f| %>
   <div class="field">
     <%= f.label :name %><br>
@@ -36,3 +36,34 @@
 <br>
 
  <%= link_to 'New Group', new_group_path %>
+ -->
+
+
+
+<p id="notice"><%= notice %></p>
+<h1>Groups</h1>
+
+ <%= form_for Group.new do |f| %>
+
+    <div class='col-sm-2'><%= f.label :name  %></div>
+    <div class='col-sm-4'><%= f.text_field :name %></div>
+
+    <%= f.submit 'ADD' %>
+<% end %>
+
+<div class="col-sm-12">
+  <fieldset class="col-sm-offset-2 col-sm-8">
+    <legend id='my_groups_legend'>My Groups</legend>
+    <% @groups.each do |group| %>
+      <span class="col-sm-8">
+        <%= link_to group.name , edit_group_path(group) , id: group.id , class: 'my_groups' %>
+      </span>
+      <span class="col-sm-2">
+        <%= link_to '', group , class: 'fa fa-user-plus' %>
+      </span>
+      <a class="col-sm-2" data-method="delete" href="/groups/<%= group.id %>">
+        <span class="glyphicon glyphicon-remove-sign"></span>
+      </a>
+    <% end %> 
+  </fieldset>
+</div>

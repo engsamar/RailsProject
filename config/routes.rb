@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :groups_users
+  resources :group_users
   resources :invitations
   resources :group_members
 
@@ -46,10 +48,12 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
   authenticate do 
 
   root 'welcome#index'
   get '/check', to: 'home#check'
+  get 'invitations/join/:id', to: 'invitations#join'
   get 'welcome/notify', to: 'welcome#notify'
   get 'welcome/check', to: 'welcome#check'
   post 'orders/:id' => 'orders#finish'

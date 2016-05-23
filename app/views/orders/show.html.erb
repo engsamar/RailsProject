@@ -1,6 +1,6 @@
-
+<div class="container">
 <p id="notice"><%= notice %></p>
-
+  <h3>Details of Order</h3>
 <p>
   <strong>Name:</strong>
   <%= @order.name %>
@@ -18,6 +18,7 @@
   <strong>By:</strong>
   <%= @order.user.name %>
 </p>
+
 <br/>
 <% if @order.user_id == current_user.id %>
 <%= form_tag("/users/invite", method: "get") do %>
@@ -80,5 +81,6 @@
 
 
 <% end %>
-
-<%= link_to 'Back', orders_path , class: "btn btn-info" %>
+<div class="group-form">
+  <%= link_to 'Back', orders_path , class: "btn btn-info" %>
+</div>
