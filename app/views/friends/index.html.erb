@@ -1,17 +1,25 @@
 <%= form_tag("/users/search", method: "get") do %>
   <p>
-    <%= text_field_tag :search, params[:search],placeholder: "Add Users by E-mail" %>
-    <%= submit_tag "add", :name => nil %>
+  <div class="col-md-8">
+    <%= text_field_tag :search, params[:search],placeholder: "Add Users by E-mail" ,class: "form-control" %>
+    </div>
+    <%= submit_tag "add", :name => nil , class: 'btn btn-success'%>
   </p>
 <% end %>
 
-<table class="table">
+<table class="table col-md-8">
+<thead>
+    <tr>
+      <th><i>friend</i></th> 
+       <th><i>unfriend</i></th>      
+    </tr>
+  </thead>
 <% @friends.each do |friend| %>
       <tr>
       <% unfriend = User.where('id ='+friend.friend_id.to_s)%>
       <% unfriend.each do |f| %>
-        <td><%=f.name %></td>       
-        <td><%= link_to 'unfriend', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><b><%=f.name %></b></td>       
+        <td><b><%= link_to 'unfriend', friend, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></b></td>
         <% end %>
       </tr>
     <% end %>
@@ -19,4 +27,4 @@
 
 <br/>
 
-<%= link_to 'New Friend', new_friend_path %>
+
