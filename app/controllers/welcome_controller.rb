@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
   end
 
 
- push notification function
+ # push notification function
   def check
     # SSE expects the `text/event-stream` content type
     response.headers['Content-Type'] = 'text/event-stream'
