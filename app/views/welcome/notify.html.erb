@@ -1,1 +1,26 @@
-<h1>hhhhhhh</h1>
+<% if user_signed_in? %>
+<div class="well">
+<table class="table" >
+  <thead>
+    <tr>
+      <th>Notification Orders</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+  <td><b>order name</b> </td>
+  <td><b>Restaurant</b> </td>
+  </tr>
+    <% @user_invits.each do |invit| %>
+      <tr>
+        <td><%= invit.name %></td>
+        <td><%= invit.restaurant %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<% end %>

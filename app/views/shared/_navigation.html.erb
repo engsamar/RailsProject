@@ -12,7 +12,7 @@
     <ul class="nav navbar-nav navbar-right">      
       <% if user_signed_in? %>
       <li><a href="/">Hello:<%= current_user.name%></a></li>
-       <li><a href="#"><span class="notify glyphicon glyphicon-globe" style="font-size:28px;color:white;"></span></a></li>
+       <li><a href="welcome/notify"><span class="notify glyphicon glyphicon-globe" style="font-size:28px;color:white;"></span></a></li>
        <li class="round-image-100"><%= link_to image_tag(current_user.image.url(:small)), current_user.image.url %></li>
       <li><a  data-method="delete" href="/users/sign_out"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       <% else %>
