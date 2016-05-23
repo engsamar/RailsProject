@@ -11,17 +11,15 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
+ <div class="form-group">
+ <%= f.label :name, "Order type:", class: "col-md-4 control-label" %>
+  <div class="col-md-8">
     <%= f.select :name,"<option value='Breakfast'>Breakfast</option><option value='Dinner'>Dinner</option><option value='Lunch'>Lunch</option>".html_safe , class: "form-control"%>
 
   </div>
-  <div class="field">
-    <%= f.label :"Restaurant Name" %><br>
-    <%= f.text_field :restaurant %>
   </div>
   <div class="form-group">
-      <%= f.label :From, "Write The restaurant Name:", class: "col-md-4 control-label" %>
+      <%= f.label :restaurant, "Restaurant Name:", class: "col-md-4 control-label" %>
       
       <div class="col-md-8">
         <%= f.text_field :restaurant, class: "form-control" %>

@@ -30,7 +30,8 @@ class InvitationsController < ApplicationController
     @invitation.is_join=false
     respond_to do |format|
       if @invitation.save
-        format.html { redirect_to @invitation }
+        format.html { redirect_to orders_path }
+        #format.html { redirect_to @invitation }
         format.json { render :show, status: :created, location: @invitation }
       else
         format.html { render :new }
