@@ -10,6 +10,10 @@ Devise.setup do |config|
   # <__signup with facebook ___>
   require "omniauth-facebook"
   config.omniauth :facebook, "199229980448960", "fbcbde122362cf0c514fe96596efb5cc"
+  # <__signup with google ___>
+  require "omniauth-google-oauth2"
+  config.omniauth :google_oauth2, "144932553727-jscf8qa52d5lvuiqgp0b80plkrq0ujn3.apps.googleusercontent.com", "gSdZRkOm3zdmoefGf0rwE2Gx", { access_type: "offline", approval_prompt: "" }
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160522193544) do
+ActiveRecord::Schema.define(version: 20160523102615) do
 
   create_table "friends", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -35,9 +35,20 @@ ActiveRecord::Schema.define(version: 20160522193544) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
+
+  create_table "groups_users", id: false, force: :cascade do |t|
+    t.integer "group_id", limit: 4
+    t.integer "user_id",  limit: 4
+  end
+
+  add_index "groups_users", ["group_id"], name: "index_groups_users_on_group_id", using: :btree
+  add_index "groups_users", ["user_id"], name: "index_groups_users_on_user_id", using: :btree
 
   create_table "invitations", force: :cascade do |t|
     t.boolean  "is_join"
@@ -112,11 +123,13 @@ ActiveRecord::Schema.define(version: 20160522193544) do
 
   add_foreign_key "friends", "users", column: "friend_id", name: "friends_ibfk_2", on_update: :cascade, on_delete: :cascade
   add_foreign_key "friends", "users", name: "friends_ibfk_1", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "group_members", "groups"
-  add_foreign_key "group_members", "users"
+
+  add_foreign_key "groups", "users"
+  add_foreign_key "groups_users", "groups"
+  add_foreign_key "groups_users", "users"
   add_foreign_key "invitations", "orders"
   add_foreign_key "invitations", "users"
-  add_foreign_key "orderdetails", "orders"
-  add_foreign_key "orderdetails", "users"
-  add_foreign_key "orders", "users"
+  add_foreign_key "orderdetails", "orders", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "orderdetails", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "orders", "users", on_update: :cascade, on_delete: :cascade
 end

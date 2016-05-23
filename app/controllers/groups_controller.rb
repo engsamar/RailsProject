@@ -4,12 +4,13 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @groups=User.find(current_user.id).groups #groups created by the logedin user
   end
 
   # GET /groups/1
   # GET /groups/1.json
   def show
+    @group=Group.find(params[:id]) #data of selected group
   end
 
   # GET /groups/new
@@ -25,11 +26,11 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-
+    @group.user_id=current_user.id
     respond_to do |format|
       if @group.save
         #redirect_to :action => 'index' to redirect same page 
-        format.html { redirect_to :action => 'index', notice: 'Group was successfully created.' }
+        format.html { redirect_to :action => 'index' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
