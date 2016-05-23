@@ -4,7 +4,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
   	uploaded_io = params[resource_name][:image]
-	File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+	  File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
   	file.write(uploaded_io.read)
 	end
 	# params[resource_name][:image] << Rails.root.join('public', 'uploads', uploaded_io.original_filename) 

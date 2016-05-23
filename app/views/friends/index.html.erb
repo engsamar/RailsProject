@@ -1,44 +1,32 @@
-<p id="notice"><%= notice %></p>
-<%= form_for User.new do |f| %>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-<%= form_tag("/users/search", method: "get") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
-<% end %>
-<!-- Multiple Hashes in Form Helper Calls -->
-<%= form_tag(users_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Users" %>
-  <%= submit_tag "Search", :name => nil %>
-<% end %>
-
-###################
 <%= form_tag("/users/search", method: "get") do %>
   <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
+  <div class="col-md-8">
+    <%= text_field_tag :search, params[:search],placeholder: "Add Users by E-mail" ,class: "form-control" %>
+    </div>
+    <%= submit_tag "add", :name => nil , class: 'btn btn-success'%>
   </p>
 <% end %>
 
+<div class="col-md-6 col-md-offset-1">
+  
 <table class="table">
+<thead>
+    <tr>
+      <th><i>friend</i></th> 
+       <th><i>unfriend</i></th>      
+    </tr>
+  </thead>
 <% @friends.each do |friend| %>
       <tr>
       <% unfriend = User.where('id ='+friend.friend_id.to_s)%>
       <% unfriend.each do |f| %>
-        <td><%=f.name %></td>       
-        <td><%= link_to 'unfriend', friend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><span class="round-image-100"><%= link_to image_tag(f.image.url(:small)), f.image.url %></span><b><%=f.name %></b></td>       
+        <td><b><%= link_to 'unfriend', friend, method: :delete, data: { confirm: 'Are you sure?' },class:'btn btn-danger' %></b></td>
         <% end %>
       </tr>
     <% end %>
 </table>
-
+</div>
 <br/>
 
-<%= link_to 'New Friend', new_friend_path %>
+
