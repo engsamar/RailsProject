@@ -28,8 +28,8 @@ class WelcomeController < ApplicationController
        t4 = t4 - 3 
         invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t4)
         unless invits.empty?
-           # sse.write({messages: messages.as_json}, {event: 'refresh'})
-           sse.write({invits: invits.as_json}, {event: 'refresh'})
+          # make your action here for notification
+          sse.write({invits: invits.as_json}, {event: 'refresh'})
         end
         sleep 3
       end
