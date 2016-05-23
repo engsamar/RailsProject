@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
   end
 
 
- # push notification function
+ push notification function
   def check
     # SSE expects the `text/event-stream` content type
     response.headers['Content-Type'] = 'text/event-stream'
@@ -50,15 +50,15 @@ class WelcomeController < ApplicationController
        puts @id
        @record = Order.find_by("id = ?",@id)
        puts @record.name
-       @user_invits << {"name" => @record.name , "restaurant" => @record.restaurant , "invite_id"=> invit.id , "joined" => invit.is_join} 
+       @user_invits << {"name" => @record.name , "restaurant" => @record.restaurant , "invite_id"=> invit.id , "joined" => invit.is_join}
         # @orders=Order.where(id:Invitation.where(:user_id => current_user.id))
       # @orders=Order.where(id: Invitation.select("order_id").where(:user_id => current_user.id))
      end
      # @orders = []
      # @user_invits.each do |f|
      #    # abort("sss")
-        
-     #   @orders << @ord.name 
+
+     #   @orders << @ord.name
      # end
   end
 

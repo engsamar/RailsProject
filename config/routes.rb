@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :invitations
   resources :group_members
 
+  get '/groups_users/:id/search', to: 'groups_users#search'
+
   # devise_for :users , :controllers => { registrations: 'registrations' }
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , registrations: 'registrations'}
 

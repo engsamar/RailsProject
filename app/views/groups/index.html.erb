@@ -1,5 +1,7 @@
-<!-- <p id="notice"><%= notice %></p>
- <%= form_for Group.new do |f| %>
+<p id="notice"><%= notice %></p>
+<h1>Groups</h1>
+
+<%= form_for Group.new do |f| %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -9,54 +11,13 @@
   </div>
 <% end %>
 
-<h1>Listing Groups</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @groups.each do |group| %>
-      <tr>
-        <td><%= group.name %></td>
-         <td><%= group.id %></td>
-        <td><%= link_to 'Show', group,class: 'btn btn-primary btn-xs' %></td>
-        <td><%= link_to 'Edit', edit_group_path(group) %></td>
-        <td><%= link_to 'Destroy', group, method: :delete, data: { confirm: 'Are you sure?' } %></td>        
-        <td><a   href="/group_members/new/"><span class="fa fa-user-plus"> </span></a></td>
-        <td><a  data-method="delete" href="/groups/<%= group.id %>"><span class="glyphicon glyphicon-remove-sign"> </span></a></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
- <%= link_to 'New Group', new_group_path %>
- -->
-
-
-
-<p id="notice"><%= notice %></p>
-<h1>Groups</h1>
-
- <%= form_for Group.new do |f| %>
-
-    <div class='col-sm-2'><%= f.label :name  %></div>
-    <div class='col-sm-4'><%= f.text_field :name %></div>
-
-    <%= f.submit 'ADD' %>
-<% end %>
-
 <div class="col-sm-12">
   <fieldset class="col-sm-offset-2 col-sm-8">
     <legend id='my_groups_legend'>My Groups</legend>
+
     <% @groups.each do |group| %>
       <span class="col-sm-8">
-        <%= link_to group.name , edit_group_path(group) , id: group.id , class: 'my_groups' %>
+        <div style='color:black;'><%= link_to group.name , edit_group_path(group) , id: group.id , class: 'my_groups' %></div>
       </span>
       <span class="col-sm-2">
         <%= link_to '', group , class: 'fa fa-user-plus' %>

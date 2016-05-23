@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /groups
   # GET /groups.json
   def index
@@ -11,6 +11,8 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @group=Group.find(params[:id]) #data of selected group
+    puts '*************************'
+    puts params[:id]
   end
 
   # GET /groups/new

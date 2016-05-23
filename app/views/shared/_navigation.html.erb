@@ -4,10 +4,12 @@
       <a class="navbar-brand" href="/">Yalla notlob</a>
     </div>
     <ul class="nav navbar-nav">
+    <% if user_signed_in? %>
       <li><a href="/">Home</a></li>
       <li><a href="/friends">Freinds</a></li>
       <li><a href="/groups">Groups</a></li>
       <li><a href="/orders">Orders</a></li>
+      <% end %>
     </ul>
     <ul class="nav navbar-nav navbar-right">      
       <% if user_signed_in? %>

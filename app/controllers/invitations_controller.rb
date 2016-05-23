@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :set_invitation, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /invitations
   # GET /invitations.json
   def index
