@@ -1,6 +1,6 @@
 class OrderdetailsController < ApplicationController
   before_action :set_orderdetail, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /orderdetails
   # GET /orderdetails.json
   def index
@@ -46,7 +46,7 @@ class OrderdetailsController < ApplicationController
   def update
     respond_to do |format|
       if @orderdetail.update(orderdetail_params)
-        format.html { redirect_to @orderdetail, notice: 'Orderdetail was successfully updated.' }
+        format.html { redirect_to @orderdetail}
         format.json { render :show, status: :ok, location: @orderdetail }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class OrderdetailsController < ApplicationController
   def destroy
     @orderdetail.destroy
     respond_to do |format|
-      format.html { redirect_to orderdetails_url, notice: 'Orderdetail was successfully destroyed.' }
+      format.html { redirect_to orderdetails_url}
       format.json { head :no_content }
     end
   end

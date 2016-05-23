@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /groups
   # GET /groups.json
   def index
@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         #redirect_to :action => 'index' to redirect same page 
-        format.html { redirect_to :action => 'index', notice: 'Group was successfully created.' }
+        format.html { redirect_to :action => 'index' }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }

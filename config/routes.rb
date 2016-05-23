@@ -20,11 +20,11 @@ Rails.application.routes.draw do
   resources :orders do 
     resources :orderdetails
   end
-resources :orders do 
+  resources :orders do 
     resources :invitations
   end
 
-    resources :orders do 
+  resources :orders do 
     resources :invitations
   end
 
@@ -39,6 +39,10 @@ resources :orders do
   resource :users do
     get "search"
     end
+
+   resource :users do
+    get "invite"
+    end 
   resources :friends do 
       get "unfriend"
     end
@@ -46,10 +50,12 @@ resources :orders do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
   authenticate do 
 
   root 'welcome#index'
   get '/check', to: 'home#check'
+  get 'invitations/join/:id', to: 'invitations#join'
   get 'welcome/notify', to: 'welcome#notify'
   get 'welcome/check', to: 'welcome#check'
   post 'orders/:id' => 'orders#finish'

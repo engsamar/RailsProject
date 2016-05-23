@@ -1,6 +1,6 @@
 class InvitationsController < ApplicationController
   before_action :set_invitation, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /invitations
   # GET /invitations.json
   def index
@@ -31,7 +31,8 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         format.html { redirect_to orders_path }
-        #format.html { redirect_to @invitation }
+        format.html { redirect_to @invitation }
+
         format.json { render :show, status: :created, location: @invitation }
       else
         format.html { render :new }
@@ -45,7 +46,7 @@ class InvitationsController < ApplicationController
   def update
     respond_to do |format|
       if @invitation.update(invitation_params)
-        format.html { redirect_to @invitation, notice: 'Invitation was successfully updated.' }
+        format.html { redirect_to @invitation}
         format.json { render :show, status: :ok, location: @invitation }
       else
         format.html { render :edit }
@@ -59,10 +60,29 @@ class InvitationsController < ApplicationController
   def destroy
     @invitation.destroy
     respond_to do |format|
-      format.html { redirect_to invitations_url, notice: 'Invitation was successfully destroyed.' }
+      format.html { redirect_to invitations_url }
       format.json { head :no_content }
     end
   end
+  #get /invitations/join/1
+
+  def join
+    @id  = params[:id]
+    invite =   Invitation.find_by("id = ?",@id)
+    invite.is_join = true
+    invite.save
+    redirect_to :controller => 'orders' ,:action => 'show' , :id => invite.order_id
+    # respond_to do |format|
+    #   if @invitation.update(invitation_params)
+    #     format.html { redirect_to :controller => 'invitations' , :action => 'index'}
+    #     format.json { render :show, status: :ok, location: @invitation }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @invitation.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

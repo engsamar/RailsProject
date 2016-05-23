@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /orders
   # GET /orders.json
   def index
@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         #format.html { redirect_to :controller => 'invitations' , :action => 'new' }
-        format.html { redirect_to edit_order_path(@order) }
+        format.html { redirect_to order_url(@order)  }
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url }
       format.json { head :no_content }
     end
   end
@@ -68,7 +68,7 @@ class OrdersController < ApplicationController
   def finish
     Order.where( id: params[:id] ).update_all( status: 'finished' )
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully finished.' }
+      format.html { redirect_to orders_url }
       format.json { head :no_content }
     end
   end

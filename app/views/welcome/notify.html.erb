@@ -1,1 +1,32 @@
-<h1>hhhhhhh</h1>
+<% if user_signed_in? %>
+<div class="well">
+<table class="table" >
+  <thead>
+    <tr>
+      <th>Notification Orders</th>      
+    </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+  <td><b>Order name</b> </td>
+  <td><b>Restaurant</b> </td>
+  <td><b>Accept</b> </td>
+  </tr>
+    <% @user_invits.each do |order| %>
+      <tr>
+        <td><%= order['name'] %></td>
+        <td><%= order['restaurant'] %></td>
+        <td>
+        <% if order["joined"] == true %>
+        <a href="/invitations/join/<%= order['invite_id'] %>">
+        <span class="glyphicon glyphicon-ok" style="color:blue;"></span></a>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<% end %>

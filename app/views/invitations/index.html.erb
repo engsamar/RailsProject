@@ -1,20 +1,21 @@
-<p id="notice"><%= notice %></p>
 
 <h1>Listing Invitations</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>User Friend</th>
-
+      <th>  user name</th>
+      <th> Action </th>
     </tr>
   </thead>
 
   <tbody>
     <% @invitations.each do |invitation| %>
       <tr>
-        <td><%= invitation.user_id %></td>
-        <td><%= link_to 'Remove', invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= invitation.user_id %></td>      
+        <td><%= User.find_by("id =?",invitation.user_id ).name %> </td>
+        <td><%= link_to 'Remove', invitation, method: :delete, data: { confirm: 'Are you sure?' } ,class:"btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>

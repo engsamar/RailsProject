@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20160523102615) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "friends", ["friend_id"], name: "friend_id", using: :btree
+  add_index "friends", ["user_id"], name: "user_id", using: :btree
+
+  create_table "group_members", force: :cascade do |t|
+    t.integer  "group_id",   limit: 4
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "group_members", ["group_id"], name: "index_group_members_on_group_id", using: :btree
+  add_index "group_members", ["user_id"], name: "index_group_members_on_user_id", using: :btree
+
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.integer  "user_id",    limit: 4
@@ -29,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160523102615) do
 
   add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 
-  create_table "groups_users", force: :cascade do |t|
+  create_table "groups_users", id: false, force: :cascade do |t|
     t.integer "group_id", limit: 4
     t.integer "user_id",  limit: 4
   end
@@ -108,12 +121,14 @@ ActiveRecord::Schema.define(version: 20160523102615) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "friends", "users", column: "friend_id", name: "friends_ibfk_2", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "friends", "users", name: "friends_ibfk_1", on_update: :cascade, on_delete: :cascade
   add_foreign_key "groups", "users"
   add_foreign_key "groups_users", "groups"
   add_foreign_key "groups_users", "users"
   add_foreign_key "invitations", "orders"
   add_foreign_key "invitations", "users"
-  add_foreign_key "orderdetails", "orders"
-  add_foreign_key "orderdetails", "users"
-  add_foreign_key "orders", "users"
+  add_foreign_key "orderdetails", "orders", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "orderdetails", "users", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "orders", "users", on_update: :cascade, on_delete: :cascade
 end

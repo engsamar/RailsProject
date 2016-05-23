@@ -1,6 +1,6 @@
 class GroupsUsersController < ApplicationController
-  # before_action :set_groups_user, only: [:show, :edit, :update, :destroy]
-
+  #before_action :set_groups_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
   # GET /groups_users
   # GET /groups_users.json
   def index
@@ -53,10 +53,10 @@ class GroupsUsersController < ApplicationController
       if is_friend.present?
         is_old_friend=GroupsUser.where(group_id: params[:group_id] , user_id:friend.id )
         if is_old_friend.present?
-          redirect_to :controller => 'groups' , :action => 'show' , :data => params[:group_id] 
+          redirect_to :controller => 'groups' , :action => 'show' , :data => params[:group_id]
         else
           @group_user = GroupsUser.new()
-          @group_user.user_id=  friend.id 
+          @group_user.user_id=  friend.id
           @group_user.group_id=params[:group_id]
           respond_to do |format|
             if @group_user.save
@@ -73,9 +73,9 @@ class GroupsUsersController < ApplicationController
       end
     else
       @alert=params[:search] + 'not a user'
-      redirect_to :controller => 'groups' , :action => 'show' , :data => params[:group_id] 
+      redirect_to :controller => 'groups' , :action => 'show' , :data => params[:group_id]
     end
-  end 
+  end
 
 
   # PATCH/PUT /groups_users/1

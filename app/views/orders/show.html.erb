@@ -1,6 +1,6 @@
-
+<div class="container">
 <p id="notice"><%= notice %></p>
-
+  <h3>Details of Order</h3>
 <p>
   <strong>Name:</strong>
   <%= @order.name %>
@@ -10,23 +10,27 @@
   <strong>Restaurant:</strong>
   <%= @order.restaurant %>
 </p>
-
-<p>
-  <strong>Menu img:</strong>
-  <%= @order.menu_img %>
-</p>
-
 <p>
   <strong>Date:</strong>
   <%= @order.date.strftime("%Y-%m-%d") %>
 </p>
-
 <p>
   <strong>By:</strong>
   <%= @order.user.name %>
 </p>
 
-<%= link_to 'Invite Friend', edit_order_path(@order), class:"btn btn-success" %>
+<br/>
+<% if @order.user_id == current_user.id %>
+<%= form_tag("/users/invite", method: "get") do %>
+  <p>
+  <div class="col-md-8">
+    <%= text_field_tag :search, params[:search],placeholder: "Add friend by name" ,class: "form-control" %>
+     <%= hidden_field_tag :order_id , params[:order_id], :value => @order.id %> 
+    </div>
+    <%= submit_tag "add invitation", :name => nil , class: 'btn btn-success'%>
+  </p>
+<% end %>
+
 
 <div class="table-responsive">
 <table class="table table-bordered table-hover ">
@@ -53,7 +57,7 @@
   </tbody>
 </table>
 </div>
-
+<% end %>
 <% if @order.status !="finished" %>
 <%= form_for([@order ,@order.orderdetails.build ]) do |f| %>
 <table class="table">
@@ -77,5 +81,9 @@
 
 
 <% end %>
+<% if @order.user_id == current_user.id %>
+<div class="group-form">
+  <%= link_to 'Back', orders_path , class: "btn btn-info" %>
+</div>
+<% end %>
 
-<%= link_to 'Back', orders_path , class: "btn btn-info" %>
