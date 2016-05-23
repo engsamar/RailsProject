@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         #format.html { redirect_to :controller => 'invitations' , :action => 'new' }
-        format.html { redirect_to edit_order_path(@order) }
+        format.html { redirect_to order_url(@order)  }
       else
         format.html { render :new }
         format.json { render json: @order.errors, status: :unprocessable_entity }

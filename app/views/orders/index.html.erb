@@ -45,7 +45,6 @@
         <td> <%= link_to 'Show', order,class:"btn btn-primary" %> 
           <% if order.status != "finished" %>
           <%= link_to 'Finish', order,class:"btn btn-success", method: :finish, data: { confirm: 'Are you sure to finish the order ?' } %> 
-         <%= link_to 'Invite More Friends', edit_order_path(order),class:"btn btn-info" %>
           
           <% end %>
           <%= link_to 'Cancel', order,class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure to cancel the order?' } %>

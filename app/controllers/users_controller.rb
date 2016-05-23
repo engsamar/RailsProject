@@ -84,7 +84,25 @@ end
     end
   end 
 
-private
+
+def invite
+    @user=User.find_by_name(params[:search])
+    @friend_invite = Invitation.new()    
+    @friend_invite.user_id =@user.id
+
+    @friend_invite.order_id=params[:order_id]
+    @friend_invite.is_join=false
+    respond_to do |format|
+      if @friend_invite.save
+     #redirect_to :action => 'index' to redirect same page
+    format.html { redirect_to :controller => 'invitations' , :action => 'index' , :data => @order_id  }
+      # format.json { render :show, status: :ok, location: @user }
+      end
+    end
+  end
+
+  private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])

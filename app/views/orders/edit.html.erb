@@ -3,18 +3,13 @@
 <% Invitation.where(:order_id => @order.id).each do |invits| %>
 <%= invits.user_id %>
 <% end %>
-<%= form_for([@order,@order.invitations.build]) do |f| %>
-
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.hidden_field :order_id  %>
-  </div>
-  <div class="actions">
-    <%= f.submit :ADD %>
-  </div>
+<%= form_tag("/users/invite", method: "get") do %>
+  <p>
+  <div class="col-md-8">
+    <%= text_field_tag :search, params[:search],placeholder: "Add friend by name" ,class: "form-control" %>
+    </div>
+    <%= submit_tag "add", :name => nil , class: 'btn btn-success'%>
+  </p>
 <% end %>
 
 

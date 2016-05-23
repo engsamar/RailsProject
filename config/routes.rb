@@ -18,11 +18,11 @@ Rails.application.routes.draw do
   resources :orders do 
     resources :orderdetails
   end
-resources :orders do 
+  resources :orders do 
     resources :invitations
   end
 
-    resources :orders do 
+  resources :orders do 
     resources :invitations
   end
 
@@ -37,6 +37,10 @@ resources :orders do
   resource :users do
     get "search"
     end
+
+   resource :users do
+    get "invite"
+    end 
   resources :friends do 
       get "unfriend"
     end
