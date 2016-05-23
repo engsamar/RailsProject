@@ -64,12 +64,18 @@ class UsersController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def search
-    @user=User.find_by_email(params[:email])
+   def search
+    @user=User.find_by_email(params[:search])
+    @friend = Friend.new()    
+    @friend.user_id = current_user.id
+    @friend.friend_id=@user.id
+    respond_to do |format|
+      if @friend.save
      #redirect_to :action => 'index' to redirect same page
-     format.html { edirect_to :action => 'friends/index', notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-
+     format.html { redirect_to :controller => 'friends' , :action => 'index' , :data => @user.id }
+      # format.json { render :show, status: :ok, location: @user }
+      end
+    end
   end 
   private
     # Use callbacks to share common setup or constraints between actions.
