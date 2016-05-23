@@ -9,14 +9,20 @@
 
   <tbody>
   <tr>
-  <td><b>order name</b> </td>
+  <td><b>Order name</b> </td>
   <td><b>Restaurant</b> </td>
+  <td><b>Accept</b> </td>
   </tr>
-    <% @user_invits.each do |invit| %>
+    <% @user_invits.each do |order| %>
       <tr>
-        <td><%= invit.name %></td>
-        <td><%= invit.restaurant %></td>
-
+        <td><%= order['name'] %></td>
+        <td><%= order['restaurant'] %></td>
+        <td>
+        <% if order["joined"] == true %>
+        <a href="/invitations/join/<%= order['invite_id'] %>">
+        <span class="glyphicon glyphicon-ok" style="color:blue;"></span></a>
+        <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -31,7 +31,8 @@ class InvitationsController < ApplicationController
     respond_to do |format|
       if @invitation.save
         format.html { redirect_to orders_path }
-        #format.html { redirect_to @invitation }
+        format.html { redirect_to @invitation }
+
         format.json { render :show, status: :created, location: @invitation }
       else
         format.html { render :new }
@@ -63,6 +64,25 @@ class InvitationsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  #get /invitations/join/1
+
+  def join
+    @id  = params[:id]
+    invite =   Invitation.find_by("id = ?",@id)
+    invite.is_join = true
+    invite.save
+    redirect_to :controller => 'invitations' , :action => 'index'
+    # respond_to do |format|
+    #   if @invitation.update(invitation_params)
+    #     format.html { redirect_to :controller => 'invitations' , :action => 'index'}
+    #     format.json { render :show, status: :ok, location: @invitation }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @invitation.errors, status: :unprocessable_entity }
+    #   end
+    # end
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

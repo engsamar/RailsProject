@@ -48,10 +48,17 @@ class WelcomeController < ApplicationController
      # puts @invits
      # puts "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
      @user_invits=[]
-     @invits.each do |invits|
-      @id=invits.order_id
-      @user_invits <<  Order.find_by(@id)
-      # @orders=Order.where(id:Invitation.where(:user_id => current_user.id))
+     @invits.each do |invit|
+     # puts "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+       puts invit.id
+       @id=invit.order_id
+       # puts "hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"
+       puts @id
+       @record = Order.find_by("id = ?",@id)
+        # puts "777777777777777777777777777777777777777777777777777777777777777777777"
+       puts @record.name
+       @user_invits << {"name" => @record.name , "restaurant" => @record.restaurant , "invite_id"=> invit.id , "joined" => invit.is_join} 
+        # @orders=Order.where(id:Invitation.where(:user_id => current_user.id))
       # @orders=Order.where(id: Invitation.select("order_id").where(:user_id => current_user.id))
      end
      # @orders = []
