@@ -24,7 +24,7 @@ resources :orders do
     resources :invitations
   end
 
-  post 'orders/:id' => 'orders#finish'
+  
 
   # resources :users
 
@@ -42,10 +42,15 @@ resources :orders do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  authenticate do 
+
   root 'welcome#index'
   get '/check', to: 'home#check'
   get 'welcome/notify', to: 'welcome#notify'
   get 'welcome/check', to: 'welcome#check'
+  post 'orders/:id' => 'orders#finish'
+  
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
