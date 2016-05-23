@@ -18,29 +18,29 @@ class WelcomeController < ApplicationController
 
 
  # push notification function
-  def check
-    # SSE expects the `text/event-stream` content type
-    response.headers['Content-Type'] = 'text/event-stream'
-    sse = SimpleApp::SSE.new(response.stream)
-    begin
-      10000.times do
-       # messages = Message.where("created_at > ?", 3.seconds.ago)
-       t = Time.now
-       # t4 = t + 2*60*60
-        t = t - 3 
-        invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t)
-        unless invits.empty?
-          # make your action here for notification
-          sse.write({invits: invits.as_json}, {event: 'refresh'})
-        end
-        sleep 3
-      end
-    rescue IOError
-      # When the client disconnects, we'll get an IOError on write
-    ensure
-      sse.close
-    end
-  end
+  # def check
+  #   # SSE expects the `text/event-stream` content type
+  #   response.headers['Content-Type'] = 'text/event-stream'
+  #   sse = SimpleApp::SSE.new(response.stream)
+  #   begin
+  #     10000.times do
+  #      # messages = Message.where("created_at > ?", 3.seconds.ago)
+  #      t = Time.now
+  #      # t4 = t + 2*60*60
+  #       t = t - 3 
+  #       invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t)
+  #       unless invits.empty?
+  #         # make your action here for notification
+  #         sse.write({invits: invits.as_json}, {event: 'refresh'})
+  #       end
+  #       sleep 3
+  #     end
+  #   rescue IOError
+  #     # When the client disconnects, we'll get an IOError on write
+  #   ensure
+  #     sse.close
+  #   end
+  # end
 
 
   def notify
