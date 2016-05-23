@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :groups_users
+  resources :group_users
   resources :invitations
   resources :group_members
 

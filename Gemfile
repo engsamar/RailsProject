@@ -36,6 +36,8 @@ gem "twitter-bootstrap-rails"
 # facebook api
 gem 'omniauth' 
 gem 'omniauth-facebook'
+# google api
+gem 'omniauth-google-oauth2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
