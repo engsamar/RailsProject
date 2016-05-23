@@ -81,6 +81,9 @@
 
 
 <% end %>
+<% if @order.user_id == current_user.id %>
 <div class="group-form">
   <%= link_to 'Back', orders_path , class: "btn btn-info" %>
 </div>
+<% end %>
+

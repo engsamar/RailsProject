@@ -1,6 +1,6 @@
 class GroupsUsersController < ApplicationController
   before_action :set_groups_user, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /groups_users
   # GET /groups_users.json
   def index
