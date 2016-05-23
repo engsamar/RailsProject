@@ -1,13 +1,17 @@
 setTimeout((function() {
   var source;
+  var x = 0;
   source = new EventSource('welcome/check');
   source.addEventListener("refresh", function(e) {
-    addMessages($.parseJSON(e.data).messages);
+  	x++;
+    addMessages($.parseJSON(e.data).invits,x);
   });
 }), 1);
 
-function addMessages(messages){
-  for(var i=0; i<messages.length; i++){
-    document.writeln(messages[i].content);
+function addMessages(invits,x){
+  for(var i=0; i<invits.length; i++){
+    // document.writeln(messages[i].content);
+    // console.log(x)
+     $('.notify').html(x);
   }
 }

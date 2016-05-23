@@ -1,8 +1,8 @@
 require 'simple_app/sse.rb' 
 class WelcomeController < ApplicationController
-  #include ActionController::Live
+  include ActionController::Live
   before_filter :authenticate_user!
-
+  # session[:n]=1
   def index
   	 @orders = Order.where(:user_id => current_user.id).limit(3).order("id desc")
   	 #select current user friends 
@@ -21,12 +21,15 @@ class WelcomeController < ApplicationController
 
     sse = SimpleApp::SSE.new(response.stream)
     begin
-      20.times do
+      10000.times do
        # messages = Message.where("created_at > ?", 3.seconds.ago)
-        invits = Invitation.where("user_id = ?",current_user.id)
+       t = Time.now
+       t4 = t + 2*60*60
+       t4 = t4 - 3 
+        invits = Invitation.where("user_id = ?",current_user.id).where("created_at > ?" , t4)
         unless invits.empty?
           # make your action here for notification
-           sse.write({invits: invits.as_json}, {event: 'refresh'})
+          sse.write({invits: invits.as_json}, {event: 'refresh'})
         end
         sleep 3
       end
@@ -35,6 +38,11 @@ class WelcomeController < ApplicationController
     ensure
       sse.close
     end
+  end
+
+
+  def notify
+
   end
 
 end

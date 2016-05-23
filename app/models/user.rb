@@ -4,6 +4,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable ,:omniauthable
 
+  has_attached_file :image, styles: { small: "32x32", med: "100x100", large: "200x200" }
+  validates :image, :attachment_presence => true
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   has_many :friends
   has_many :orders
 	has_many :friends, :through => :friend
